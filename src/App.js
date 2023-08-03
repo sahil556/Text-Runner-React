@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import Alert from './Alert';
 import './App.css';
-// import About from './components/About';
+import About from './components/About';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-// } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -28,7 +28,7 @@ function App() {
     if (mode2 !== 'dark') {
       setMode2('dark');
       document.body.style.backgroundColor = '#001a09';
-      document.title = 'TextRunner - Dark Mode'
+      // document.title = 'TextRunner - Dark Mode'
 
     }
     else {
@@ -45,12 +45,12 @@ function App() {
 
     }
   }
-  const toggleMode = () => {
+  const toggleMode = (cls) => {
     if (mode !== 'dark') {
       setMode('dark');
       document.body.style.backgroundColor = '#1c1b35';
       showAlert("Dark mode has been enabled", "success");
-      document.title = 'TextRunner - Dark Mode'
+      // document.title = 'TextRunner - Dark Mode'
       // title can be sparked
       // setInterval(() => {
       //   document.title = "Text Runner is Amazing";
@@ -76,20 +76,23 @@ function App() {
   }
   return (
     <>
-    {/* <Router> */}
+    <Router>
       <Navbar title="TextRunner" aboutText="About us" mode={mode} mode2={mode2} toggleMode2={toggleMode2} toggleMode={toggleMode} />
       <Alert alert={alert} />
       <div className='container my-3'>
-        {/* <Switch> */}
-          {/* <Route exact path="/about" component={About}> */}
-          {/* <About/> */}
-          {/* </Route> */}
-          {/* <Route exact path="/"> */}
-            <TextForm heading="Enter Text to analyze Below" mode={mode} mode2={mode2} showAlert={showAlert} />
-          {/* </Route> */}
-        {/* </Switch> */}
+        <Switch>
+          <Route exact path="/about" component={About}>
+          <About mode={mode}/>
+          </Route>
+          <Route exact path="/">
+            <TextForm heading="Try TextRunner - Word Counter, Character Counter, Remove Extra spaces" mode={mode} mode2={mode2} showAlert={showAlert} />
+          </Route>
+          <Route exact path="/Text-Runner-React">
+            <TextForm heading="Try TextRunner - Word Counter, Character Counter, Remove Extra spaces" mode={mode} mode2={mode2} showAlert={showAlert} />
+          </Route>
+        </Switch>
       </div>
-    {/* </Router> */}
+    </Router>
     </>
   );
 }
