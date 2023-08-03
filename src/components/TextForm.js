@@ -6,10 +6,6 @@ export default function TextForm(props) {
     color = props.mode2 === 'dark' ? '#d5f4e6' : color;
     let btncolor = props.mode2 === 'dark' ? 'success' : 'primary';
     const handleUpClick = () => {
-        // console.log("handle uppercase " + text);
-        // let newText = text.toUpperCase();
-        // setText(newText);
-        // can be optimized bty
         setText(text.toUpperCase());
         props.showAlert("Converted to Uppercase", "success");
     }
@@ -21,20 +17,18 @@ export default function TextForm(props) {
     }
 
     const handleLpClick = () => {
-        // console.log("handle lower case")
         let newtext = text.toLowerCase();
         setText(newtext);
         props.showAlert("Converted to Lowercase", "success");
     }
     const handleCopy = () => {
-        let text = document.getElementById("myBox");
-        text.select();
-        navigator.clipboard.writeText(text.value);
-        document.getSelection().removeAllRanges();
+        // let text = document.getElementById("myBox");
+        // text.select();
+        navigator.clipboard.writeText(text);
+        // document.getSelection().removeAllRanges();
         props.showAlert("Text Copied to Clipboard", "success");
     }
     const handleClearClick = () => {
-        // console.log("hanlde clear")
         setText("");
         setRedo("");
     }
@@ -70,7 +64,6 @@ export default function TextForm(props) {
         }
     }
     const handleOnChange = (event) => {
-        // console.log("handle on change");
         setText(event.target.value);
         // setText(event.target.value.toUpperCase());
         // on change upper case
@@ -96,8 +89,8 @@ export default function TextForm(props) {
             </div>
             <div className='container my-2' style={{ color: color !== 'white' ? 'white' : 'Black' }}>
                 <h2>Your Text Summary</h2>
-                <p>{text.split(" ").filter((element)=>{return element.length !== 0}).length} words and {text.length} characters</p>
-                <p>{0.008 * text.split(" ").filter((element)=>{return element.length !== 0}).length} Minutes read</p>
+                <p>{text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} Minutes read</p>
                 <h2>Preview</h2>
                 <p>{text.length > 0 ? text : "Nothing To preview it."}</p>
             </div>
