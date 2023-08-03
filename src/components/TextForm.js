@@ -22,10 +22,10 @@ export default function TextForm(props) {
         props.showAlert("Converted to Lowercase", "success");
     }
     const handleCopy = () => {
-        // let text = document.getElementById("myBox");
-        // text.select();
-        navigator.clipboard.writeText(text);
-        // document.getSelection().removeAllRanges();
+        let text = document.getElementById("myBox");
+        text.select();
+        navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.showAlert("Text Copied to Clipboard", "success");
     }
     const handleClearClick = () => {
@@ -89,8 +89,8 @@ export default function TextForm(props) {
             </div>
             <div className='container my-2' style={{ color: color !== 'white' ? 'white' : 'Black' }}>
                 <h2>Your Text Summary</h2>
-                <p>{text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} words and {text.length} characters</p>
-                <p>{0.008 * text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} Minutes read</p>
+                <p>{text.split(" ").filter((element)=>{return element.length !== 0}).length} words and {text.length} characters</p>
+                <p>{0.008 * text.split(" ").filter((element)=>{return element.length !== 0}).length} Minutes read</p>
                 <h2>Preview</h2>
                 <p>{text.length > 0 ? text : "Nothing To preview it."}</p>
             </div>
